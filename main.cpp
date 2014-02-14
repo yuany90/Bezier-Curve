@@ -14,13 +14,16 @@ static int height = 600;
 float camera_theta = PI/2.0;
 float camera_phi = 0.0;
 float camera_r = 30.0;
+
+int precision = 5;
+bool showControlPoints = true;
 bezier * b;
 
 void init(){
   glEnable(GL_DEPTH_TEST);
   glDisable(GL_LIGHTING);
   glEnable(GL_NORMALIZE);
-  glClearColor(0.4, 0.4, 0.4, 1.0);
+  glClearColor(0.5, 0.5, 0.5, 1.0);
   glShadeModel(GL_FLAT);
   glDisable(GL_COLOR_MATERIAL);
 }
@@ -70,6 +73,22 @@ void keyboard(unsigned char key, int x, int y)
   case '5':
          b->setPrecisions(5);
          break;
+  case '6':
+         b->setPrecisions(6);
+         break;
+  case '7':
+         b->setPrecisions(7);
+         break;
+  case '8':
+         b->setPrecisions(8);
+         break;
+  case '9':
+         b->setPrecisions(9);
+         break;
+  case 's':
+	     showControlPoints = !showControlPoints;
+         b->controlPoints(showControlPoints);
+         break;
   }
   glutPostRedisplay();
 }
@@ -101,6 +120,9 @@ int main(int argc, char * argv[])
 			 exit(0);
 		}
         b = readBezierFile(argv[1]);
+		b->setPrecisions(5);
+		b->controlPoints(showControlPoints);
+
         glutInit(&argc, argv);
         glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
         glutInitWindowSize(width, height);
