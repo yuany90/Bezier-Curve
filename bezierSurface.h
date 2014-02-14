@@ -8,12 +8,11 @@ private:
 	int vPoints;
 	float ***controlPoints;
 	float ***curvePoints;
-	bool showControlPoints;
 	void bezierSurface::calSurface();
 public:
-	bezierSurface(int uPoints, int vPoints, float **points[3], int precision = 20, bool showControlPoints = true);
+	bezierSurface(int uPoints, int vPoints, float **points[3]);
 	void bezierSurface::setShowPoints(bool showControlPoints);
 	virtual void draw();
-    ~bezierSurface();
+        ~bezierSurface();
 };
 #endif
