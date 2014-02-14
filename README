@@ -13,27 +13,27 @@ algorithm to use.
 User guide:
 Input file sample for Bezier Surface:
 2 3
-0.0 2.0 0.0 
-1.0 1.8 0.0 
-2.0 1.0 0.0 
-3.0 0.0 0.0
-0.0 2.0 1.0 
-1.0 1.8 1.0 
-2.0 1.0 1.0 
-3.0 0.0 1.0
-0.0 2.0 2.0 
-1.0 1.8 2.0 
-2.0 1.0 2.0 
-3.0 0.0 2.0
+1.0 1.0 1.0
+2.0 1.2 1.0
+3.0 0.8 1.0
+4.0 1.0 1.0
+1.0 1.0 2.0
+2.0 5.0 2.0
+3.0 0.8 2.0
+4.0 1.0 2.0
+1.0 1.0 3.0
+2.0 0.8 3.0
+3.0 1.2 3.0
+4.0 1.0 3.0
 
 The line "2 3" means it is a bezier surface and u = 2+1 = 3, v = 3+1 = 4.
 Then follows control points coordinates.
 Note v = 1 for Bezier Curve. So input file sample for Bezier Curve is like
 3 0
-0.0 2.0 0.0 
-1.0 1.8 0.0 
-2.0 1.0 0.0 
-3.0 0.0 0.0
+1.0 1.0 1.0
+2.0 3.0 1.0
+3.0 0.8 1.0
+4.0 1.0 1.0
 
 Controls:
 z, x: move camera
