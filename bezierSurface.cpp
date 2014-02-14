@@ -5,15 +5,10 @@
 #include <GL\glut.h>
 #define ALGORITHM 0
 
-bezierSurface::bezierSurface(int uPoints, int vPoints, float **points[3], int precision, bool showControlPoints){
+bezierSurface::bezierSurface(int uPoints, int vPoints, float **points[3]):bezier(){
 	this->uPoints = uPoints;
 	this->vPoints = vPoints;
 	controlPoints = points;
-	if(precision < 2){
-		precision = 2;
-	}
-	this->precision = precision;
-	this->showControlPoints = showControlPoints;
 }
 
 void bezierSurface::setShowPoints(bool showControlPoints){
@@ -69,40 +64,47 @@ void bezierSurface::draw(){
 	glPushMatrix();
     bool color = false;
     float black[] = {0.0, 0.0, 0.0};
-    float red[] = {1.0, 0.0, 0.0};
-	float white[] = {0.0, 0.0, 0.0};
-	glColor3fv(red);
+    float white[] = {1.0, 1.0, 1.0};
+	float red[] = {1.0, 0.0, 0.0};
+	glColor3fv(black);
     for(int ui = 0; ui < precision; ui++) {
-		glBegin(GL_LINES);
+		glBegin(GL_TRIANGLE_STRIP);
         for(int vi = 0; vi <= precision; vi++) {
             if(color) {
-			//	glColor3fv(black);
-			//	color = false;
+				glColor3fv(white);
 			} else {
-            //    glColor3fv(red);
-            //    color = true;
+                glColor3fv(black);
             }
 			float * p1 = curvePoints[ui][vi];
             float * p2 = curvePoints[ui+1][vi];
             glVertex3fv(p1);
             glVertex3fv(p2);
+			color = !color;
         }
+		if(precision%2 == 1){
+			color = !color;
+		}
         glEnd();
     }
-	glColor3fv(white);
+	glLineWidth(2.0);
+	glColor3fv(red);
 	if(showControlPoints){
-		glBegin(GL_LINES);
 		for(int m = 0; m <= uPoints; m++){
-			for(int n=0; n<vPoints; n++){
-				
-				float * p1 = controlPoints[m][n];
-				float * p2 = controlPoints[m][n+1];
-				glVertex3fv(p1);
-				glVertex3fv(p2);
-				
+			glBegin(GL_LINE_STRIP);
+			for(int n=0; n<=vPoints; n++){
+				float * p = controlPoints[m][n];
+				glVertex3fv(p);	
 			}
+			glEnd();
 		}
-		glEnd();
+		for(int n=0; n<=vPoints; n++){
+			glBegin(GL_LINE_STRIP);
+			for(int m = 0; m <= uPoints; m++){
+				float * p = controlPoints[m][n];
+				glVertex3fv(p);	
+			}
+			glEnd();
+		}
 	}
 	glPopMatrix();
 }
