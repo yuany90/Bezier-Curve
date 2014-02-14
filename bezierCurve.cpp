@@ -6,14 +6,12 @@
 #define ALGORITHM 0
 using namespace std;
 
-bezierCurve::bezierCurve(int numPoints, float *points[3], int precision, bool showControlPoints ){
+bezierCurve::bezierCurve(int numPoints, float *points[3]):bezier(){
 	this->numPoints = numPoints;
 	controlPoints = points;
 	if(precision < 2){
 		precision = 2;
 	}
-	this->precision = precision;
-	this->showControlPoints = showControlPoints;
 }
 
 void bezierCurve::setShowPoints(bool showControlPoints){
@@ -81,14 +79,19 @@ void bezierCurve::calCurve(){
 void bezierCurve::draw(){
 	std::cout<<"Curve Points"<<endl;
 	this->calCurve();
+	float black[] = {0.0, 0.0, 0.0};
+    float red[] = {1.0, 0.0, 0.0};
 	glPushMatrix();
+	glLineWidth(2.0);
 	glBegin(GL_LINE_STRIP);
+	glColor3fv(black);
 	for(int i = 0; i<=precision; i++){
 		GLfloat * v = curvePoints[i];
 		std:cout<<curvePoints[i][0]<<','<<curvePoints[i][1]<<','<<curvePoints[i][2]<<endl;
 		glVertex3fv(v);
 	}
 	glEnd();
+	glColor3fv(red);
 	if(showControlPoints){
 		glColor3f(1.0f, 0.0f, 0.0f);
 		glBegin(GL_LINE_STRIP);
