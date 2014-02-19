@@ -3,7 +3,7 @@ Bezier-Curve
 
 Algorithm
 ------------
-This is a C++ program that generated Bezier Curve and Bezier Surface in two different approaches.
+This is a C++ program generated Bezier Curve and Bezier Surface in two different approaches.
 
 - One approach implements "De Casteljau's algorithm". It is a recursive method to evaluate polynomials in Bernstein form or Bézier curves. Please see http://en.wikipedia.org/wiki/De_Casteljau's_algorithm.
 - Another way is directly using the Bezier Curve formula. Please see http://en.wikipedia.org/wiki/B%C3%A9zier_curve
